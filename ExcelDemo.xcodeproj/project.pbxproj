@@ -13,6 +13,8 @@
 		89B443642069E46300C22861 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B443632069E46300C22861 /* Assets.xcassets */; };
 		89B443672069E46300C22861 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B443652069E46300C22861 /* LaunchScreen.storyboard */; };
 		89B4436A2069E46300C22861 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B443692069E46300C22861 /* main.m */; };
+		89B443712069EBFD00C22861 /* localizable in Resources */ = {isa = PBXBuildFile; fileRef = 89B443702069EBFD00C22861 /* localizable */; };
+		C20A7BD5206A317A007F7425 /* exporty.xls in Resources */ = {isa = PBXBuildFile; fileRef = C20A7BD4206A317A007F7425 /* exporty.xls */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		89B443662069E46300C22861 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89B443682069E46300C22861 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89B443692069E46300C22861 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		89B443702069EBFD00C22861 /* localizable */ = {isa = PBXFileReference; lastKnownFileType = text; path = localizable; sourceTree = "<group>"; };
+		C20A7BD4206A317A007F7425 /* exporty.xls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = exporty.xls; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,8 @@
 				89B443652069E46300C22861 /* LaunchScreen.storyboard */,
 				89B443682069E46300C22861 /* Info.plist */,
 				89B443692069E46300C22861 /* main.m */,
+				89B443702069EBFD00C22861 /* localizable */,
+				C20A7BD4206A317A007F7425 /* exporty.xls */,
 			);
 			path = ExcelDemo;
 			sourceTree = "<group>";
@@ -130,6 +136,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				89B443672069E46300C22861 /* LaunchScreen.storyboard in Resources */,
+				C20A7BD5206A317A007F7425 /* exporty.xls in Resources */,
+				89B443712069EBFD00C22861 /* localizable in Resources */,
 				89B443642069E46300C22861 /* Assets.xcassets in Resources */,
 				89B443622069E46300C22861 /* Main.storyboard in Resources */,
 			);
@@ -218,7 +226,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -267,7 +275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -284,7 +292,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tim.demo.ExcelDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -298,7 +306,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tim.demo.ExcelDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

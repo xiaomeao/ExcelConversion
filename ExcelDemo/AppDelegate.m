@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  ExcelDemo
 //
-//  Created by wuaming on 2018/3/27.
-//  Copyright © 2018年 tim. All rights reserved.
+//  Created by 杜 on 2018/3/27.
+//  Copyright © 2018年 杜. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -16,36 +16,67 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    [self creatExcelFile];
+//    [self createLocalizable];
+    
     return YES;
 }
 
+#pragma mark - localizable 转 xls
+- (void)creatExcelFile {
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    NSError *error;
+    NSString *textFileContents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"localizable" ofType:@""] encoding:NSUTF8StringEncoding error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+        return;
+    }
+    textFileContents = [NSString stringWithFormat:@"key\t简体中文\n%@", textFileContents];
+    NSString *newText = [[[textFileContents stringByReplacingOccurrencesOfString:@"\"" withString:@""] stringByReplacingOccurrencesOfString:@" = " withString:@"\t"] stringByReplacingOccurrencesOfString:@";" withString:@""];
+    // 文件管理器
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    //使用UTF16才能显示汉字；如果显示为#######是因为格子宽度不够，拉开即可
+    NSData *fileData = [newText dataUsingEncoding:NSUTF16StringEncoding];
+    // 文件路径
+    NSString *path = NSHomeDirectory();
+    NSString *filePath = [path stringByAppendingPathComponent:@"/Documents/export.xls"];
+    NSLog(@"文件路径：\n%@",filePath);
+#warning 手动复制出来
+    // 生成xls文件
+    [fileManager createFileAtPath:filePath contents:fileData attributes:nil];
 }
 
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+#pragma mark - xls 转 localizable
+- (void)createLocalizable
+{
+    NSError *error;
+    NSString *textFileContents = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"exporty" ofType:@"xls"] encoding:NSUTF16StringEncoding error:&error];
+    if (error) {
+        NSLog(@"%@", error);
+        return;
+    }
+    NSArray *textArray = [textFileContents componentsSeparatedByString:@"\n"];
+    NSLog(@"%@",textArray);
+    NSMutableArray *newAry = [NSMutableArray arrayWithCapacity:0];
+    for (NSString *text in textArray) {
+        NSString *newtxt = @"";
+        newtxt = [NSString stringWithFormat:@"\"%@",text];
+        newtxt = [newtxt stringByReplacingOccurrencesOfString:@"\t" withString:@"\" = \""];
+        newtxt = [NSString stringWithFormat:@"%@\";",newtxt];
+        [newAry addObject:newtxt];
+    }
+    NSLog(@"%@",newAry);
+    
+    NSString *newText = [newAry componentsJoinedByString:@"\n"];
+    
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSData *fileData = [newText dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *path = NSHomeDirectory();
+    NSString *filePath = [path stringByAppendingPathComponent:@"/Documents/localizable"];
+    NSLog(@"文件路径：\n%@",filePath);
+    // 生成localizable文件
+    [fileManager createFileAtPath:filePath contents:fileData attributes:nil];
 }
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
 
 @end
